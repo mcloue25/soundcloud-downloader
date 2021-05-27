@@ -17,7 +17,7 @@ from selenium.webdriver.common.by import By
 
 
 def get_all_song_urls(playlist_url):
-    browser = webdriver.Chrome("C:/Users/eoinm/Drivers/chromedriver")
+    browser = get_browser()
     browser.get(playlist_url)
     request = requests.get(playlist_url)
     # Create a BeautifulSoup Object
@@ -58,7 +58,8 @@ def check_downloadable_songs(url_list):
             #button wasnt there so move on and try next 
         
 
-def open_soundcloud_browser():
+def get_browser():
+    browser = webdriver.Chrome("C:/Users/eoinm/Drivers/chromedriver")
 
     return browser
 
@@ -113,6 +114,13 @@ while True:
             print("There was an error finding the playlist, please make sure its public")
 
         # /html/body/div[4]/div/div/button[2]
+
+    if choice == 3:
+        browser = get_browser()
+        # https://soundcloud.com/kojaques/love-and-braggadocio
+        buttons = [i for i in browser.find_element_by_class_name("sc-button-medium")]
+        for button in buttons:
+            print(button.text)
                 
 
 
